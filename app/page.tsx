@@ -6,10 +6,10 @@ import { BadgeCheck, Calendar, Check, Crown, Lock, LogIn, UserPlus } from 'lucid
 
 // Brand Configuration for Locs by Angie
 const SALON_CONFIG = {
-  name: 'Locs by Angie',
+  name: 'LOCS BY ANGIE',
   logoImgPath: '/locs.jpg',
   qrCodeSvg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23271c14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="5.5" y="5.5" width="2" height="2" fill="%23271c14"/><rect x="16.5" y="5.5" width="2" height="2" fill="%23271c14"/><rect x="5.5" y="16.5" width="2" height="2" fill="%23271c14"/><rect x="16.5" y="16.5" width="2" height="2" fill="%23271c14"/></svg>`,
-  bookingUrl: 'https://locsbyangiedreadlocks.com/',
+  bookingUrl: 'https://locsbyangiedreadlocks.com/#807e0a96-2446-424e-bb3a-97d927aba05f',
   masterPin: '1234',
   totalStampsNeeded: 5,
   featuredReward: 'Complimentary Hot Oil & ACV Scalp Detox',
