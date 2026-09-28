@@ -1,15 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, Sparkles, UserPlus } from 'lucide-react'
 
-// Custom Brand Configuration for Locs by Angie
+// Brand Configuration for Locs by Angie
 const SALON_CONFIG = {
   name: 'Locs by Angie',
-  logoUrl: 'https://locsbyangiedreadlocks.com/wp-content/uploads/2021/08/cropped-logo-1.png', // Replace with direct image asset path if needed
-  logoText: 'LBA',
+  logoUrl: '/locs.jpg', // Placed directly in public/ folder
+  logoText: 'Locs By Angie',
   bookingUrl: 'https://locsbyangiedreadlocks.com/',
   masterPin: '1234',
   totalStampsNeeded: 5,
@@ -17,7 +16,7 @@ const SALON_CONFIG = {
 
 type ViewState = 'scan_filter' | 'join_form' | 'stamp_form' | 'passport'
 
-export default function AngieLoyaltyPassport() {
+export default function Page() {
   const [view, setView] = useState<ViewState>('scan_filter')
 
   // Client Data with LocalStorage Persistence
@@ -26,12 +25,12 @@ export default function AngieLoyaltyPassport() {
   const [stamps, setStamps] = useState(0)
   const [isFirstJoin, setIsFirstJoin] = useState(false)
 
-  // Security & Modals
+  // Modals & PIN verification
   const [pin, setPin] = useState('')
   const [pinError, setPinError] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
 
-  // Load saved client state on mount
+  // Restore client session from LocalStorage on load
   useEffect(() => {
     const savedName = localStorage.getItem('angie_user_name')
     const savedPhone = localStorage.getItem('angie_user_phone')
@@ -42,14 +41,14 @@ export default function AngieLoyaltyPassport() {
     if (savedStamps) setStamps(Number(savedStamps))
   }, [])
 
-  // Helper function to update state and local storage
+  // Helper to persist state updates
   const saveClientData = (name: string, phoneNumber: string, currentStamps: number) => {
     localStorage.setItem('angie_user_name', name)
     localStorage.setItem('angie_user_phone', phoneNumber)
     localStorage.setItem('angie_user_stamps', currentStamps.toString())
   }
 
-  // 1. New Client Registration
+  // 1. New Client Registration Flow
   const handleJoinSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!userName || !phone) return
@@ -62,13 +61,12 @@ export default function AngieLoyaltyPassport() {
     setView('passport')
   }
 
-  // 2. Returning Client Visit / Stamp Collection
+  // 2. Returning Client / Stamp Collection Flow
   const handleStampSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!phone) return
     setIsFirstJoin(false)
 
-    // Reward redemption logic on reaching total stamps
     if (stamps >= SALON_CONFIG.totalStampsNeeded) {
       if (pin !== SALON_CONFIG.masterPin) {
         setPinError(true)
@@ -91,10 +89,11 @@ export default function AngieLoyaltyPassport() {
   return (
     <main className="min-h-screen bg-[#FAF8F5] px-4 py-5 font-sans text-zinc-900 sm:px-6">
       <div className="mx-auto flex min-h-[calc(100vh-40px)] max-w-md flex-col">
+        
         {/* Header */}
         <header className="flex items-center justify-between border-b border-amber-900/10 py-2 pb-4">
           <div className="flex items-center gap-3 text-left">
-            <span className="flex size-11 items-center justify-center overflow-hidden rounded-full border border-amber-900/20 bg-amber-900 text-xs font-bold tracking-[0.15em] text-amber-100">
+            <span className="flex size-11 items-center justify-center overflow-hidden rounded-full border border-amber-900/20 bg-amber-950 text-xs font-bold tracking-[0.15em] text-amber-200">
               {SALON_CONFIG.logoText}
             </span>
             <div>
@@ -117,13 +116,14 @@ export default function AngieLoyaltyPassport() {
           >
             <div className="text-center">
               <div className="mx-auto mb-4 flex size-20 items-center justify-center rounded-2xl border border-amber-100 bg-amber-50/50 p-3 shadow-inner">
-                <Image
+                <img
                   src={SALON_CONFIG.logoUrl}
                   alt={SALON_CONFIG.name}
-                  width={120}
-                  height={60}
-                  unoptimized
                   className="h-auto max-h-12 w-auto object-contain"
+                  onError={(e) => {
+                    // Fallback to text monogram if logo fails to load
+                    e.currentTarget.style.display = 'none'
+                  }}
                 />
               </div>
 
