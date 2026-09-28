@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, Sparkles, UserPlus } from 'lucide-react'
+import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, UserPlus } from 'lucide-react'
 
 // Brand Configuration for Locs by Angie
 const SALON_CONFIG = {
