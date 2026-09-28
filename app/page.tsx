@@ -2,19 +2,43 @@
 
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, Sparkles, UserPlus } from 'lucide-react'
+import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, QrCode, Sparkles, UserPlus } from 'lucide-react'
 
 // Brand Configuration for Locs by Angie
 const SALON_CONFIG = {
   name: 'Locs by Angie',
-  logoUrl: '/locs.jpg', // Placed directly in public/ folder
-  logoText: 'Locs By Angie',
-  bookingUrl: 'https://locsbyangiedreadlocks.com/',
+  bookingUrl: 'https://locsbyangiedreadlocks.com/#807e0a96-2446-424e-bb3a-97d927aba05f',
   masterPin: '1234',
   totalStampsNeeded: 5,
 }
 
 type ViewState = 'scan_filter' | 'join_form' | 'stamp_form' | 'passport'
+
+// Lightweight QR Code SVG Replica Component
+function QrCodeReplica({ className = 'size-12' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <rect x="3" y="3" width="7" height="7" rx="1.5" className="fill-amber-950/10 stroke-amber-950" />
+      <rect x="5" y="5" width="3" height="3" className="fill-amber-950" />
+      <rect x="14" y="3" width="7" height="7" rx="1.5" className="fill-amber-950/10 stroke-amber-950" />
+      <rect x="16" y="5" width="3" height="3" className="fill-amber-950" />
+      <rect x="3" y="14" width="7" height="7" rx="1.5" className="fill-amber-950/10 stroke-amber-950" />
+      <rect x="5" y="16" width="3" height="3" className="fill-amber-950" />
+      <path d="M14 14h3v3h-3z" className="fill-amber-950" />
+      <path d="M18 14h3v3h-3z" className="fill-amber-950" />
+      <path d="M14 18h3v3h-3z" className="fill-amber-950" />
+      <path d="M18 18h3v3h-3z" className="fill-amber-950" />
+    </svg>
+  )
+}
 
 export default function Page() {
   const [view, setView] = useState<ViewState>('scan_filter')
@@ -90,11 +114,11 @@ export default function Page() {
     <main className="min-h-screen bg-[#FAF8F5] px-4 py-5 font-sans text-zinc-900 sm:px-6">
       <div className="mx-auto flex min-h-[calc(100vh-40px)] max-w-md flex-col">
         
-        {/* Header */}
+        {/* Header with SVG QR Logo */}
         <header className="flex items-center justify-between border-b border-amber-900/10 py-2 pb-4">
           <div className="flex items-center gap-3 text-left">
-            <span className="flex size-11 items-center justify-center overflow-hidden rounded-full border border-amber-900/20 bg-amber-950 text-xs font-bold tracking-[0.15em] text-amber-200">
-              {SALON_CONFIG.logoText}
+            <span className="flex size-11 items-center justify-center overflow-hidden rounded-full border border-amber-900/20 bg-amber-950/5 p-2 text-amber-950">
+              <QrCodeReplica className="size-6 text-amber-950" />
             </span>
             <div>
               <span className="block text-[15px] font-semibold uppercase tracking-wider text-zinc-900">
@@ -115,16 +139,9 @@ export default function Page() {
             className="mt-8 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
           >
             <div className="text-center">
+              {/* QR CODE SVG REPLICA IN MAIN DISPLAY */}
               <div className="mx-auto mb-4 flex size-20 items-center justify-center rounded-2xl border border-amber-100 bg-amber-50/50 p-3 shadow-inner">
-                <img
-                  src={SALON_CONFIG.logoUrl}
-                  alt={SALON_CONFIG.name}
-                  className="h-auto max-h-12 w-auto object-contain"
-                  onError={(e) => {
-                    // Fallback to text monogram if logo fails to load
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
+                <QrCodeReplica className="size-12 text-amber-950" />
               </div>
 
               <h1 className="text-2xl font-light tracking-wide text-zinc-900">
