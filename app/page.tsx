@@ -7,12 +7,13 @@ import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, Sparkles, UserPlus
 // Brand Configuration for Locs by Angie
 const SALON_CONFIG = {
   name: 'Locs by Angie',
-  logoImgPath: '/locs.jpg', // Placed directly in public/ folder as locs.jpg
-  // Replica QR code SVG represented as a data URI
+  logoImgPath: '/locs.jpg',
   qrCodeSvg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%233f2c1d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="%233f2c1d"/><rect x="16" y="5" width="3" height="3" fill="%233f2c1d"/><rect x="5" y="16" width="3" height="3" fill="%233f2c1d"/><rect x="16" y="16" width="3" height="3" fill="%233f2c1d"/></svg>`,
   bookingUrl: 'https://locsbyangiedreadlocks.com/',
   masterPin: '1234',
   totalStampsNeeded: 5,
+  featuredReward: 'Free Hot Oil & ACV Detox Rinse', // Tangible demo reward
+  rewardValue: '$35 Value',
 }
 
 type ViewState = 'scan_filter' | 'join_form' | 'stamp_form' | 'passport'
@@ -112,58 +113,75 @@ export default function Page() {
           </div>
         </header>
 
-        {/* VIEW 1: INITIAL SCAN FILTER */}
+        {/* VIEW 1: INITIAL SCAN FILTER WITH OFFER BANNER */}
         {view === 'scan_filter' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mt-8 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
+            className="mt-6 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
           >
             <div className="text-center">
               {/* Brand Logo Display */}
-              <div className="mx-auto mb-4 flex size-24 items-center justify-center rounded-2xl border border-amber-100 bg-amber-50/50 p-3 shadow-inner overflow-hidden">
+              <div className="mx-auto mb-3 flex size-20 items-center justify-center overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/50 p-2 shadow-inner">
                 <img
                   src={SALON_CONFIG.logoImgPath}
                   alt={SALON_CONFIG.name}
-                  className="h-auto max-h-16 w-auto object-contain rounded-xl"
+                  className="h-auto max-h-14 w-auto object-contain rounded-xl"
                   onError={(e) => {
-                    // Fallback to QR SVG if image fails to load
                     e.currentTarget.src = SALON_CONFIG.qrCodeSvg
                   }}
                 />
               </div>
 
-              <h1 className="text-2xl font-light tracking-wide text-zinc-900">
-                Welcome to <span className="font-semibold">{SALON_CONFIG.name}</span>
+              <h1 className="text-xl font-light tracking-wide text-zinc-900">
+                VIP Loc Rewards at <span className="font-semibold">{SALON_CONFIG.name}</span>
               </h1>
-              <p className="mt-2 text-xs text-zinc-500">
-                Collect stamps on retwists, maintenance & color sessions
+            </div>
+
+            {/* DEMO OFFER BANNER - SHOWS THE OWNER THE EXACT VALUE PROPOSITION */}
+            <div className="mt-5 rounded-2xl border border-amber-300 bg-gradient-to-br from-amber-50 to-amber-100/60 p-4 text-left shadow-sm">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-center gap-2 text-amber-950">
+                  <Sparkles className="size-4 text-amber-800" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-amber-900">
+                    5th Visit Reward Unlock
+                  </span>
+                </div>
+                <span className="rounded-full bg-amber-950 px-2 py-0.5 text-[10px] font-semibold text-amber-200">
+                  {SALON_CONFIG.rewardValue}
+                </span>
+              </div>
+              <p className="mt-1.5 text-sm font-semibold text-zinc-900">
+                {SALON_CONFIG.featuredReward}
+              </p>
+              <p className="mt-1 text-[11px] leading-relaxed text-amber-900/70">
+                Collect 1 stamp per maintenance, retwist, or color visit to unlock automatically.
               </p>
             </div>
 
-            <div className="mt-8 flex flex-col gap-4">
+            <div className="mt-6 flex flex-col gap-3.5">
               <button
                 onClick={() => setView('join_form')}
-                className="flex items-center justify-between rounded-2xl border border-amber-950 bg-amber-950 p-5 text-left text-white shadow-md transition hover:bg-amber-900"
+                className="flex items-center justify-between rounded-2xl border border-amber-950 bg-amber-950 p-4 text-left text-white shadow-md transition hover:bg-amber-900"
               >
-                <div className="flex items-center gap-4">
-                  <UserPlus className="size-6 text-amber-300" />
+                <div className="flex items-center gap-3.5">
+                  <UserPlus className="size-5 text-amber-300" />
                   <div>
-                    <p className="text-base font-medium text-white">Join Loc Care Loyalty</p>
-                    <p className="text-xs text-amber-200/70">First visit? Register in seconds</p>
+                    <p className="text-sm font-medium text-white">Join & Get First Stamp Today</p>
+                    <p className="text-[11px] text-amber-200/70">New client? Register in 10 seconds</p>
                   </div>
                 </div>
               </button>
 
               <button
                 onClick={() => setView('stamp_form')}
-                className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-zinc-50/80 p-5 text-left transition hover:bg-zinc-100"
+                className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-zinc-50/80 p-4 text-left transition hover:bg-zinc-100"
               >
-                <div className="flex items-center gap-4">
-                  <LogIn className="size-6 text-zinc-700" />
+                <div className="flex items-center gap-3.5">
+                  <LogIn className="size-5 text-zinc-700" />
                   <div>
-                    <p className="text-base font-medium text-zinc-900">Returning Client / Stamp Pass</p>
-                    <p className="text-xs text-zinc-400">Enter phone to collect today's stamp</p>
+                    <p className="text-sm font-medium text-zinc-900">Returning Client / Stamp Card</p>
+                    <p className="text-[11px] text-zinc-400">Enter phone to record today's visit</p>
                   </div>
                 </div>
               </button>
@@ -177,11 +195,11 @@ export default function Page() {
             onSubmit={handleJoinSubmit}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-8 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
+            className="mt-6 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
           >
             <h2 className="text-xl font-medium text-zinc-900">New Client Registration</h2>
             <p className="mt-1 text-xs text-zinc-500">
-              Register once to collect your first retwist stamp and unlock VIP benefits.
+              Register once to claim Stamp #1 toward your free Hot Oil & ACV Detox Treatment.
             </p>
 
             <div className="mt-6 flex flex-col gap-4">
@@ -232,10 +250,10 @@ export default function Page() {
             onSubmit={handleStampSubmit}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-8 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
+            className="mt-6 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
           >
             <h2 className="text-xl font-medium text-zinc-900">
-              {stamps >= SALON_CONFIG.totalStampsNeeded ? 'Redeem VIP Loc Treatment' : 'Stamp Loyalty Pass'}
+              {stamps >= SALON_CONFIG.totalStampsNeeded ? 'Redeem VIP Treatment' : 'Stamp Loyalty Pass'}
             </h2>
             <p className="mt-1 text-xs text-zinc-500">
               {stamps >= SALON_CONFIG.totalStampsNeeded
@@ -260,7 +278,7 @@ export default function Page() {
                 <div className="rounded-xl border border-amber-300 bg-amber-50/80 p-4">
                   <Sparkles className="mb-1 size-5 text-amber-800" />
                   <p className="text-xs font-semibold uppercase tracking-wider text-amber-950">
-                    Reward Unlocked: Free Hydrating Scalp Treatment / ACV Loc Detox
+                    Reward Unlocked: {SALON_CONFIG.featuredReward}
                   </p>
                   <label className="mt-3 flex flex-col gap-1.5 text-xs text-amber-900/80">
                     Enter 4-Digit Staff PIN
