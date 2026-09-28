@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { BadgeCheck, CalendarDays, Check, Crown, Gift, LogIn, UserPlus } from 'lucide-react'
+import { BadgeCheck, Calendar, Check, Crown, Lock, LogIn, UserPlus } from 'lucide-react'
 
 // Brand Configuration for Locs by Angie
 const SALON_CONFIG = {
-  name: 'LOCS BY ANGIE',
+  name: 'Locs by Angie',
   logoImgPath: '/locs.jpg',
-  qrCodeSvg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%233f2c1d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="5" y="5" width="3" height="3" fill="%233f2c1d"/><rect x="16" y="5" width="3" height="3" fill="%233f2c1d"/><rect x="5" y="16" width="3" height="3" fill="%233f2c1d"/><rect x="16" y="16" width="3" height="3" fill="%233f2c1d"/></svg>`,
-  bookingUrl: 'https://locsbyangiedreadlocks.com/#807e0a96-2446-424e-bb3a-97d927aba05f',
+  qrCodeSvg: `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23271c14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="5.5" y="5.5" width="2" height="2" fill="%23271c14"/><rect x="16.5" y="5.5" width="2" height="2" fill="%23271c14"/><rect x="5.5" y="16.5" width="2" height="2" fill="%23271c14"/><rect x="16.5" y="16.5" width="2" height="2" fill="%23271c14"/></svg>`,
+  bookingUrl: 'https://locsbyangiedreadlocks.com/',
   masterPin: '1234',
   totalStampsNeeded: 5,
-  featuredReward: 'Free Hot Oil & ACV Detox Rinse', // Tangible demo reward
+  featuredReward: 'Complimentary Hot Oil & ACV Scalp Detox',
   rewardValue: '$35 Value',
 }
 
@@ -27,7 +27,7 @@ export default function Page() {
   const [stamps, setStamps] = useState(0)
   const [isFirstJoin, setIsFirstJoin] = useState(false)
 
-  // Modals & PIN verification
+  // Security & Modals
   const [pin, setPin] = useState('')
   const [pinError, setPinError] = useState(false)
   const [showSuccessModal, setShowSuccessModal] = useState(false)
@@ -89,40 +89,39 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FAF8F5] px-4 py-5 font-sans text-zinc-900 sm:px-6">
-      <div className="mx-auto flex min-h-[calc(100vh-40px)] max-w-md flex-col">
+    <main className="min-h-screen bg-[#FDFBF7] px-4 py-6 font-sans text-zinc-900 antialiased sm:px-6">
+      <div className="mx-auto flex min-h-[calc(100vh-48px)] max-w-sm flex-col justify-between">
         
         {/* Header */}
-        <header className="flex items-center justify-between border-b border-amber-900/10 py-2 pb-4">
-          <div className="flex items-center gap-3 text-left">
-            <span className="flex size-11 items-center justify-center overflow-hidden rounded-full border border-amber-900/20 bg-amber-50 p-2">
+        <header className="flex items-center justify-between border-b border-zinc-200/60 pb-4">
+          <div className="flex items-center gap-3">
+            <span className="flex size-10 items-center justify-center rounded-xl border border-zinc-200 bg-white p-2 shadow-xs">
               <img
                 src={SALON_CONFIG.qrCodeSvg}
-                alt="QR Pass"
+                alt="Pass Code"
                 className="size-full object-contain"
               />
             </span>
             <div>
-              <span className="block text-[15px] font-semibold uppercase tracking-wider text-zinc-900">
+              <span className="block text-xs font-semibold uppercase tracking-widest text-zinc-900">
                 {SALON_CONFIG.name}
               </span>
-              <span className="text-[11px] uppercase tracking-widest text-amber-800/70">
-                VIP Loc Care Pass
+              <span className="text-[10px] uppercase tracking-wider text-zinc-400">
+                VIP Client Pass
               </span>
             </div>
           </div>
         </header>
 
-        {/* VIEW 1: INITIAL SCAN FILTER WITH OFFER BANNER */}
+        {/* VIEW 1: LANDING & VALUE PROPOSITION */}
         {view === 'scan_filter' && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mt-6 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="my-auto py-4"
           >
             <div className="text-center">
-              {/* Brand Logo Display */}
-              <div className="mx-auto mb-3 flex size-20 items-center justify-center overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/50 p-2 shadow-inner">
+              <div className="mx-auto mb-4 flex size-20 items-center justify-center overflow-hidden rounded-2xl border border-zinc-200/80 bg-white p-2 shadow-xs">
                 <img
                   src={SALON_CONFIG.logoImgPath}
                   alt={SALON_CONFIG.name}
@@ -133,55 +132,55 @@ export default function Page() {
                 />
               </div>
 
-              <h1 className="text-xl font-light tracking-wide text-zinc-900">
-                VIP Loc Rewards at <span className="font-semibold">{SALON_CONFIG.name}</span>
+              <h1 className="text-lg font-medium tracking-tight text-zinc-900">
+                Client Loyalty Program
               </h1>
+              <p className="mt-1 text-xs text-zinc-500">
+                Earn rewards on retwists, maintenance & scalp treatments.
+              </p>
             </div>
 
-            {/* DEMO OFFER BANNER - SHOWS THE OWNER THE EXACT VALUE PROPOSITION */}
-            <div className="mt-5 rounded-2xl border border-amber-300 bg-gradient-to-br from-amber-50 to-amber-100/60 p-4 text-left shadow-sm">
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-center gap-2 text-amber-950">
-                  <Sparkles className="size-4 text-amber-800" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-amber-900">
-                    5th Visit Reward Unlock
-                  </span>
-                </div>
-                <span className="rounded-full bg-amber-950 px-2 py-0.5 text-[10px] font-semibold text-amber-200">
+            {/* HIGH-VALUE DEMO BANNER */}
+            <div className="mt-6 rounded-2xl border border-zinc-200/80 bg-white p-4 text-left shadow-xs">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-amber-900">
+                  5th Visit Reward
+                </span>
+                <span className="rounded-md bg-amber-50 px-2 py-0.5 text-[10px] font-medium text-amber-900 border border-amber-200/60">
                   {SALON_CONFIG.rewardValue}
                 </span>
               </div>
-              <p className="mt-1.5 text-sm font-semibold text-zinc-900">
+              <p className="mt-2 text-xs font-semibold text-zinc-900">
                 {SALON_CONFIG.featuredReward}
               </p>
-              <p className="mt-1 text-[11px] leading-relaxed text-amber-900/70">
-                Collect 1 stamp per maintenance, retwist, or color visit to unlock automatically.
+              <p className="mt-1 text-[11px] leading-relaxed text-zinc-500">
+                Automatically applied after completing 5 maintenance visits.
               </p>
             </div>
 
-            <div className="mt-6 flex flex-col gap-3.5">
+            <div className="mt-6 flex flex-col gap-3">
               <button
                 onClick={() => setView('join_form')}
-                className="flex items-center justify-between rounded-2xl border border-amber-950 bg-amber-950 p-4 text-left text-white shadow-md transition hover:bg-amber-900"
+                className="flex w-full items-center justify-between rounded-xl bg-zinc-900 px-4 py-3.5 text-left text-white shadow-xs transition hover:bg-zinc-800 active:scale-[0.99]"
               >
-                <div className="flex items-center gap-3.5">
-                  <UserPlus className="size-5 text-amber-300" />
+                <div className="flex items-center gap-3">
+                  <UserPlus className="size-4 text-zinc-300" />
                   <div>
-                    <p className="text-sm font-medium text-white">Join & Get First Stamp Today</p>
-                    <p className="text-[11px] text-amber-200/70">New client? Register in 10 seconds</p>
+                    <p className="text-xs font-medium text-white">New Client Registration</p>
+                    <p className="text-[10px] text-zinc-400">Claim initial visit stamp</p>
                   </div>
                 </div>
               </button>
 
               <button
                 onClick={() => setView('stamp_form')}
-                className="flex items-center justify-between rounded-2xl border border-zinc-200 bg-zinc-50/80 p-4 text-left transition hover:bg-zinc-100"
+                className="flex w-full items-center justify-between rounded-xl border border-zinc-200/80 bg-white px-4 py-3.5 text-left transition hover:bg-zinc-50 active:scale-[0.99]"
               >
-                <div className="flex items-center gap-3.5">
-                  <LogIn className="size-5 text-zinc-700" />
+                <div className="flex items-center gap-3">
+                  <LogIn className="size-4 text-zinc-600" />
                   <div>
-                    <p className="text-sm font-medium text-zinc-900">Returning Client / Stamp Card</p>
-                    <p className="text-[11px] text-zinc-400">Enter phone to record today's visit</p>
+                    <p className="text-xs font-medium text-zinc-900">Returning Client</p>
+                    <p className="text-[10px] text-zinc-400">Enter phone to record today's visit</p>
                   </div>
                 </div>
               </button>
@@ -189,56 +188,56 @@ export default function Page() {
           </motion.div>
         )}
 
-        {/* VIEW 2: JOIN FORM */}
+        {/* VIEW 2: REGISTRATION FORM */}
         {view === 'join_form' && (
           <motion.form
             onSubmit={handleJoinSubmit}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
+            className="my-auto py-4"
           >
-            <h2 className="text-xl font-medium text-zinc-900">New Client Registration</h2>
+            <h2 className="text-base font-medium text-zinc-900">Client Registration</h2>
             <p className="mt-1 text-xs text-zinc-500">
-              Register once to claim Stamp #1 toward your free Hot Oil & ACV Detox Treatment.
+              Register once to start tracking your retwist sessions and unlocks.
             </p>
 
             <div className="mt-6 flex flex-col gap-4">
-              <label className="flex flex-col gap-2 text-xs text-zinc-500">
+              <label className="flex flex-col gap-1.5 text-xs font-medium text-zinc-700">
                 First Name
                 <input
                   required
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  className="rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 outline-none focus:border-amber-900"
+                  className="rounded-lg border border-zinc-200/80 bg-white px-3.5 py-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900"
                   placeholder="e.g. Marcus"
                 />
               </label>
 
-              <label className="flex flex-col gap-2 text-xs text-zinc-500">
+              <label className="flex flex-col gap-1.5 text-xs font-medium text-zinc-700">
                 Phone Number
                 <input
                   required
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 outline-none focus:border-amber-900"
+                  className="rounded-lg border border-zinc-200/80 bg-white px-3.5 py-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900"
                   placeholder="(510) 012-3456"
                 />
               </label>
 
               <button
                 type="submit"
-                className="mt-2 rounded-xl bg-amber-950 py-4 text-sm font-semibold text-white shadow-md transition hover:bg-amber-900"
+                className="mt-2 w-full rounded-xl bg-zinc-900 py-3 text-xs font-medium text-white shadow-xs transition hover:bg-zinc-800 active:scale-[0.99]"
               >
-                Register & Get Stamp #1
+                Register & Claim Stamp #1
               </button>
 
               <button
                 type="button"
                 onClick={() => setView('scan_filter')}
-                className="py-2 text-center text-xs text-zinc-400 hover:text-zinc-600"
+                className="py-1 text-center text-xs text-zinc-400 hover:text-zinc-600"
               >
-                ← Back to options
+                ← Return to options
               </button>
             </div>
           </motion.form>
@@ -248,40 +247,45 @@ export default function Page() {
         {view === 'stamp_form' && (
           <motion.form
             onSubmit={handleStampSubmit}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-6 rounded-[28px] border border-amber-900/10 bg-white p-6 shadow-xl shadow-amber-900/5"
+            className="my-auto py-4"
           >
-            <h2 className="text-xl font-medium text-zinc-900">
-              {stamps >= SALON_CONFIG.totalStampsNeeded ? 'Redeem VIP Treatment' : 'Stamp Loyalty Pass'}
+            <h2 className="text-base font-medium text-zinc-900">
+              {stamps >= SALON_CONFIG.totalStampsNeeded ? 'Redeem Reward' : 'Record Visit'}
             </h2>
             <p className="mt-1 text-xs text-zinc-500">
               {stamps >= SALON_CONFIG.totalStampsNeeded
-                ? 'Angie or staff PIN required to redeem.'
-                : "Enter your phone number to stamp today's appointment."}
+                ? 'Staff authorization required to redeem.'
+                : 'Enter your phone number to collect today\'s stamp.'}
             </p>
 
             <div className="mt-6 flex flex-col gap-4">
-              <label className="flex flex-col gap-2 text-xs text-zinc-500">
+              <label className="flex flex-col gap-1.5 text-xs font-medium text-zinc-700">
                 Phone Number
                 <input
                   required
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="rounded-xl border border-zinc-200 bg-zinc-50/50 px-4 py-3 text-sm text-zinc-900 outline-none focus:border-amber-900"
+                  className="rounded-lg border border-zinc-200/80 bg-white px-3.5 py-2.5 text-xs text-zinc-900 outline-none focus:border-zinc-900"
                   placeholder="(510) 012-3456"
                 />
               </label>
 
               {stamps >= SALON_CONFIG.totalStampsNeeded && (
-                <div className="rounded-xl border border-amber-300 bg-amber-50/80 p-4">
-                  <Sparkles className="mb-1 size-5 text-amber-800" />
-                  <p className="text-xs font-semibold uppercase tracking-wider text-amber-950">
-                    Reward Unlocked: {SALON_CONFIG.featuredReward}
+                <div className="rounded-xl border border-amber-200/80 bg-amber-50/50 p-3.5">
+                  <div className="flex items-center gap-1.5 text-amber-900">
+                    <Lock className="size-3.5" />
+                    <span className="text-xs font-semibold uppercase tracking-wider">
+                      Reward Ready
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-zinc-700 font-medium">
+                    {SALON_CONFIG.featuredReward}
                   </p>
-                  <label className="mt-3 flex flex-col gap-1.5 text-xs text-amber-900/80">
-                    Enter 4-Digit Staff PIN
+                  <label className="mt-3 flex flex-col gap-1 text-xs text-zinc-500">
+                    Staff PIN
                     <input
                       type="password"
                       maxLength={4}
@@ -291,179 +295,180 @@ export default function Page() {
                         setPinError(false)
                       }}
                       className={`rounded-lg border ${
-                        pinError ? 'border-red-500 bg-red-50' : 'border-amber-200 bg-white'
-                      } px-3 py-2 text-center text-zinc-900 outline-none`}
+                        pinError ? 'border-red-500 bg-red-50' : 'border-zinc-200 bg-white'
+                      } px-3 py-2 text-center text-xs text-zinc-900 outline-none`}
                       placeholder="••••"
                     />
                   </label>
-                  {pinError && <p className="mt-1 text-[11px] text-red-600">Incorrect staff PIN. Try again.</p>}
+                  {pinError && <p className="mt-1 text-[10px] text-red-600">Incorrect PIN. Please try again.</p>}
                 </div>
               )}
 
               <button
                 type="submit"
-                className="mt-2 rounded-xl bg-amber-950 py-4 text-sm font-semibold text-white shadow-md transition hover:bg-amber-900"
+                className="mt-2 w-full rounded-xl bg-zinc-900 py-3 text-xs font-medium text-white shadow-xs transition hover:bg-zinc-800 active:scale-[0.99]"
               >
-                {stamps >= SALON_CONFIG.totalStampsNeeded ? 'Verify & Redeem Reward' : "Collect Today's Stamp"}
+                {stamps >= SALON_CONFIG.totalStampsNeeded ? 'Authorize & Redeem' : 'Confirm Visit'}
               </button>
 
               <button
                 type="button"
                 onClick={() => setView('scan_filter')}
-                className="py-2 text-center text-xs text-zinc-400 hover:text-zinc-600"
+                className="py-1 text-center text-xs text-zinc-400 hover:text-zinc-600"
               >
-                ← Back to options
+                ← Return to options
               </button>
             </div>
           </motion.form>
         )}
 
-        {/* VIEW 4: DIGITAL PASSPORT */}
+        {/* VIEW 4: DIGITAL PASSPORT CARD */}
         {view === 'passport' && (
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex flex-1 flex-col">
-            <div className="mt-6 flex items-center justify-between">
+          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="my-auto py-2">
+            <div className="flex items-center justify-between">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.2em] text-amber-800">VIP Loc Passport</p>
-                <h1 className="mt-1 text-2xl font-light tracking-tight text-zinc-900">
-                  Welcome{isFirstJoin ? '' : ' back'}, <span className="font-semibold">{userName || 'Valued Guest'}</span>
+                <p className="text-[10px] uppercase tracking-widest text-zinc-400">Digital Card</p>
+                <h1 className="text-lg font-medium text-zinc-900">
+                  {userName || 'Valued Guest'}
                 </h1>
               </div>
-              <span className="flex items-center gap-1.5 rounded-full border border-amber-900/20 bg-amber-100/60 px-3 py-1.5 text-xs font-medium text-amber-950">
-                <Gift className="size-3.5 text-amber-800" /> Active Pass
+              <span className="rounded-md border border-zinc-200/80 bg-white px-2.5 py-1 text-[10px] font-medium text-zinc-700 shadow-2xs">
+                Active Member
               </span>
             </div>
 
-            <section className="mt-5 rounded-[28px] border border-amber-900/10 bg-white p-5 shadow-xl shadow-amber-900/5">
+            <section className="mt-4 rounded-2xl border border-zinc-200/80 bg-white p-4 shadow-xs">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-400">Retwist Cycle</p>
-                  <p className="mt-1 text-sm text-zinc-600">
+                  <p className="text-[10px] uppercase tracking-wider text-zinc-400">Progress</p>
+                  <p className="mt-0.5 text-xs text-zinc-600">
                     {stamps < SALON_CONFIG.totalStampsNeeded
                       ? `${SALON_CONFIG.totalStampsNeeded - stamps} visit${
                           SALON_CONFIG.totalStampsNeeded - stamps === 1 ? '' : 's'
-                        } away from your Free Scalp Detox Treatment`
-                      : 'Free Scalp Detox Unlocked!'}
+                        } remaining until reward`
+                      : 'Reward Ready for Redemption'}
                   </p>
                 </div>
-                <span className="text-3xl font-light text-zinc-900">
+                <span className="text-xl font-light text-zinc-900">
                   {stamps}
-                  <span className="text-lg text-amber-900/30">/{SALON_CONFIG.totalStampsNeeded}</span>
+                  <span className="text-sm text-zinc-300">/{SALON_CONFIG.totalStampsNeeded}</span>
                 </span>
               </div>
 
-              {/* 5-Stamp Grid Layout */}
-              <div className="mt-6 grid grid-cols-5 gap-2">
+              {/* Minimal Stamp Grid */}
+              <div className="mt-5 grid grid-cols-5 gap-2">
                 {Array.from({ length: SALON_CONFIG.totalStampsNeeded }, (_, index) => {
                   const filled = index < stamps
                   const isRewardSpot = index === SALON_CONFIG.totalStampsNeeded - 1
                   return (
                     <div
                       key={index}
-                      className={`relative flex aspect-square items-center justify-center rounded-2xl border ${
+                      className={`relative flex aspect-square items-center justify-center rounded-xl border ${
                         filled
-                          ? 'border-amber-950 bg-amber-950 text-white'
+                          ? 'border-zinc-900 bg-zinc-900 text-white'
                           : isRewardSpot
-                          ? 'border-amber-400 bg-amber-50'
+                          ? 'border-amber-300/80 bg-amber-50/40'
                           : 'border-zinc-100 bg-zinc-50/50'
                       }`}
                     >
                       <span
-                        className={`absolute left-2 top-2 text-[9px] ${
-                          filled ? 'text-amber-200/60' : 'text-zinc-400'
+                        className={`absolute left-2 top-1.5 text-[8px] font-mono ${
+                          filled ? 'text-zinc-500' : 'text-zinc-300'
                         }`}
                       >
                         0{index + 1}
                       </span>
                       {filled ? (
-                        <span className="flex size-7 items-center justify-center rounded-full bg-amber-100 text-amber-950">
-                          <Check className="size-4 stroke-[3]" />
-                        </span>
+                        <Check className="size-3.5 stroke-[2.5]" />
                       ) : isRewardSpot ? (
-                        <Crown className="size-5 text-amber-800" />
+                        <Crown className="size-3.5 text-amber-800" />
                       ) : (
-                        <span className="size-2 rounded-full bg-zinc-200" />
+                        <span className="size-1.5 rounded-full bg-zinc-200" />
                       )}
                     </div>
                   )
                 })}
               </div>
 
-              <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-zinc-100">
+              <div className="mt-4 h-1 overflow-hidden rounded-full bg-zinc-100">
                 <motion.div
                   animate={{ width: `${(stamps / SALON_CONFIG.totalStampsNeeded) * 100}%` }}
-                  className="h-full rounded-full bg-amber-950"
+                  className="h-full rounded-full bg-zinc-900"
                 />
               </div>
             </section>
 
-            <section className="mt-6 flex flex-col gap-3">
+            <section className="mt-4 flex flex-col gap-2.5">
               <a
                 href={SALON_CONFIG.bookingUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center justify-center gap-2 rounded-2xl bg-amber-950 py-4 text-sm font-semibold text-white shadow-lg transition hover:bg-amber-900"
+                className="flex items-center justify-center gap-2 rounded-xl bg-zinc-900 py-3 text-xs font-medium text-white shadow-xs transition hover:bg-zinc-800 active:scale-[0.99]"
               >
-                <CalendarDays className="size-4 text-amber-300" /> Book Next Retwist Session
+                <Calendar className="size-3.5" /> Schedule Next Appointment
               </a>
 
               <button
                 onClick={() => setView('scan_filter')}
-                className="py-2 text-center text-xs text-zinc-400 hover:text-zinc-600"
+                className="py-1 text-center text-xs text-zinc-400 hover:text-zinc-600"
               >
-                Simulate Counter QR Scan
+                Simulate QR Code Scan
               </button>
             </section>
           </motion.div>
         )}
 
-        <p className="mt-auto pt-8 text-center text-[10px] uppercase tracking-[0.2em] text-zinc-400">
-          Secure Loc Care Pass · {SALON_CONFIG.name}
-        </p>
+        {/* Footer */}
+        <footer className="pt-4 text-center border-t border-zinc-200/60">
+          <p className="text-[10px] uppercase tracking-widest text-zinc-400">
+            {SALON_CONFIG.name} · Digital Pass
+          </p>
+        </footer>
       </div>
 
-      {/* Success Modal */}
+      {/* Confirmation Modal */}
       <AnimatePresence>
         {showSuccessModal && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 flex items-end justify-center bg-zinc-950/50 p-4 backdrop-blur-sm sm:items-center"
+            className="fixed inset-0 z-40 flex items-end justify-center bg-zinc-900/20 p-4 backdrop-blur-xs sm:items-center"
           >
             <motion.div
-              initial={{ y: 30, scale: 0.96 }}
+              initial={{ y: 20, scale: 0.98 }}
               animate={{ y: 0, scale: 1 }}
-              className="w-full max-w-sm rounded-[28px] border border-amber-900/10 bg-white p-6 text-center shadow-2xl"
+              className="w-full max-w-xs rounded-2xl border border-zinc-200/80 bg-white p-5 text-center shadow-lg"
             >
-              <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-amber-950 text-amber-200">
-                <BadgeCheck className="size-8" />
+              <span className="mx-auto flex size-10 items-center justify-center rounded-full bg-zinc-900 text-white">
+                <BadgeCheck className="size-5" />
               </span>
 
-              <h2 className="mt-5 text-xl font-medium text-zinc-900">
-                {isFirstJoin ? `Welcome, ${userName}!` : `Welcome back, ${userName || 'Valued Guest'}!`}
+              <h2 className="mt-3 text-sm font-medium text-zinc-900">
+                {isFirstJoin ? `Welcome, ${userName}` : `Welcome back, ${userName || 'Guest'}`}
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-500">
+              <p className="mt-1 text-xs text-zinc-500 leading-relaxed">
                 {stamps === 0
-                  ? 'Your Scalp Detox reward has been redeemed!'
-                  : `You're ${SALON_CONFIG.totalStampsNeeded - stamps} retwist visit${
+                  ? 'Your reward has been redeemed.'
+                  : `${SALON_CONFIG.totalStampsNeeded - stamps} visit${
                       SALON_CONFIG.totalStampsNeeded - stamps === 1 ? '' : 's'
-                    } away from your complimentary scalp treatment!`}
+                    } remaining until your complimentary treatment.`}
               </p>
 
-              <div className="mt-6 flex flex-col gap-2">
+              <div className="mt-4 flex flex-col gap-2">
                 <a
                   href={SALON_CONFIG.bookingUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl bg-amber-950 py-3 text-sm font-semibold text-white"
+                  className="rounded-xl bg-zinc-900 py-2.5 text-xs font-medium text-white shadow-xs"
                 >
-                  Book Next Retwist
+                  Book Appointment
                 </a>
                 <button
                   onClick={() => setShowSuccessModal(false)}
-                  className="rounded-xl border border-zinc-200 py-3 text-sm text-zinc-500 hover:text-zinc-900"
+                  className="py-1 text-xs text-zinc-400 hover:text-zinc-600"
                 >
-                  View Passport Card
+                  View Digital Card
                 </button>
               </div>
             </motion.div>
